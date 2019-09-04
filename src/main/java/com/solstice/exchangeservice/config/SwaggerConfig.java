@@ -19,6 +19,6 @@ public class SwaggerConfig {
                 .apis(RequestHandlerSelectors.basePackage("com.solstice.exchangeservice.web"))
                 .paths(PathSelectors.any())
                 .build()
-                .tags(new Tag("Exchange Service Controller", "This is used for getting and posting Exchange Rates"));
+                .tags(new Tag("Exchange Service Controller HERE IS A CHANGE MY GUY", "This is used for getting and posting Exchange Rates"));
     }
 }
