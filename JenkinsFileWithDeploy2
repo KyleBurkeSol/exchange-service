@@ -13,10 +13,10 @@ pipeline {
         }
         stage('Test') {
             steps {
-                sh 'echo "skip tests for now"'
+                sh 'echo "skip tests for now because they take too long"'
             }
         }
-        stage('Deploy to CF') {
+        stage('Deploy') {
             steps {
                 pushToCloudFoundry cloudSpace: 'kburke_cnt', credentialsId: 'pcfLogin', organization: 'solstice-org', target: 'https://api.run.pivotal.io'
             }
