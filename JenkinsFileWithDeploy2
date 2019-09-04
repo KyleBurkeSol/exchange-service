@@ -1,0 +1,28 @@
+pipeline {
+    parameters {
+        string( name: 'pcfToken', description: 'CF access token used to deploy the app')
+    }
+    agent any
+    stages {
+        stage('Clean') {
+            steps {
+                sh './gradlew clean'
+            }
+        }
+        stage('Build') {
+            steps {
+                sh './gradlew assemble'
+            }
+        }
+        stage('Test') {
+            steps {
+                sh 'echo "skip tests for now"'
+            }
+        }
+        stage('Deploy to CF') {
+            steps {
+                pushToCloudFoundry cloudSpace: 'kburke_cnt', credentialsId: 'pcfLogin', organization: 'solstice-org', target: 'https://api.run.pivotal.io'
+            }
+        }
+    }
+}
