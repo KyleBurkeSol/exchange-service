@@ -2,9 +2,8 @@ package com.solstice.exchangeservice.web;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.solstice.exchangeservice.model.ExchangeRate;
-import com.solstice.exchangeservice.service.ExchangeRateNotFoundException;
+import com.solstice.exchangeservice.exception.ExchangeRateNotFoundException;
 import com.solstice.exchangeservice.service.ExchangeServiceService;
-import com.solstice.exchangeservice.service.ResourceAlreadyExistsException;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;

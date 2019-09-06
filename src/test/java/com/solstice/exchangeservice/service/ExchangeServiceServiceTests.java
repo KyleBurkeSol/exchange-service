@@ -1,6 +1,7 @@
 package com.solstice.exchangeservice.service;
 
 import com.solstice.exchangeservice.data.ExchangeServiceRepository;
+import com.solstice.exchangeservice.exception.ResourceAlreadyExistsException;
 import com.solstice.exchangeservice.model.ExchangeRate;
 import org.junit.Assert;
 import org.junit.Test;
