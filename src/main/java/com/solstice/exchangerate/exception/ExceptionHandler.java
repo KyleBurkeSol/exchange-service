@@ -1,8 +1,6 @@
-package com.solstice.exchangeservice.exception;
+package com.solstice.exchangerate.exception;
 
-import com.solstice.exchangeservice.model.GenericResponse;
-import com.solstice.exchangeservice.service.ExchangeRateNotFoundException;
-import com.solstice.exchangeservice.service.ResourceAlreadyExistsException;
+import com.solstice.exchangerate.model.GenericResponse;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -23,8 +21,8 @@ public class ExceptionHandler extends ResponseEntityExceptionHandler {
 
     @org.springframework.web.bind.annotation.ExceptionHandler(ExchangeRateNotFoundException.class)
     public ResponseEntity<ExchangeRateNotFoundException> handleExchangeRateNotFoundException(ExchangeRateNotFoundException e) {
-
-        return new ResponseEntity<>(e, HttpStatus.NOT_FOUND);
+    logger.error("Exchange Rate Not Found");
+    return new ResponseEntity<>(e, HttpStatus.NOT_FOUND);
     }
 
     @Override
@@ -33,13 +31,14 @@ public class ExceptionHandler extends ResponseEntityExceptionHandler {
                                                                           HttpStatus status,
                                                                           WebRequest request){
 
-      GenericResponse response = new GenericResponse("Some Request parameters might be missing");
+      GenericResponse response = new GenericResponse("Invalid Request");
+      logger.error("To Or From Param Missing");
       return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
     }
 
     @org.springframework.web.bind.annotation.ExceptionHandler(ResourceAlreadyExistsException.class)
     public ResponseEntity<ResourceAlreadyExistsException> handleResourceAlreadyExistsException(ResourceAlreadyExistsException e) {
-
+        logger.error("Exchange Rate already exists");
         return new ResponseEntity<>(e, HttpStatus.CONFLICT);
     }
 
@@ -48,7 +47,7 @@ public class ExceptionHandler extends ResponseEntityExceptionHandler {
                                                                HttpHeaders headers, HttpStatus status, WebRequest request) {
 
         GenericResponse requestBodyGenericResponse = new GenericResponse("Request Body Empty");
-
+        logger.error("Request Body Empty");
         return new ResponseEntity<>(requestBodyGenericResponse, HttpStatus.BAD_REQUEST);
     }
 

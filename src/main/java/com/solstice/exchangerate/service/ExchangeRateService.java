@@ -1,23 +1,25 @@
-package com.solstice.exchangeservice.service;
+package com.solstice.exchangerate.service;
 
-import com.solstice.exchangeservice.data.ExchangeServiceRepository;
-import com.solstice.exchangeservice.model.ExchangeRate;
+import com.solstice.exchangerate.data.ExchangeRateRepository;
+import com.solstice.exchangerate.exception.ExchangeRateNotFoundException;
+import com.solstice.exchangerate.exception.ResourceAlreadyExistsException;
+import com.solstice.exchangerate.model.ExchangeRate;
 import org.springframework.stereotype.Service;
 
 @Service
-public class ExchangeServiceService {
+public class ExchangeRateService {
 
-	final ExchangeServiceRepository exchangeServiceRepository;
+	final ExchangeRateRepository exchangeRateRepository;
 
-	public ExchangeServiceService(ExchangeServiceRepository exchangeServiceRepository) {
-		this.exchangeServiceRepository = exchangeServiceRepository;
+	public ExchangeRateService(ExchangeRateRepository exchangeRateRepository) {
+		this.exchangeRateRepository = exchangeRateRepository;
 	}
 
 	public ExchangeRate getExchangeRate(String from, String to) {
 		String message = "Exchange Rate Not Found";
 
 		//Call the repo interface method
-		ExchangeRate exchangeRate = exchangeServiceRepository
+		ExchangeRate exchangeRate = exchangeRateRepository
 				.findByFromCurrencyAndToCurrency(from, to);
 
 		if(exchangeRate ==null){
@@ -27,11 +29,11 @@ public class ExchangeServiceService {
 	}
 
 	public void addExchangeRate(ExchangeRate response) {
-		ExchangeRate r = exchangeServiceRepository
+		ExchangeRate r = exchangeRateRepository
 				.findByFromCurrencyAndToCurrency(response.getFromCurrency(), response.getToCurrency());
 
 		if(r == null){
-			exchangeServiceRepository.save(response);
+			exchangeRateRepository.save(response);
 		} else {
 			throw new ResourceAlreadyExistsException("Value already exists", r.getFromCurrency(), r.getToCurrency(), r.getConversion());
 		}
