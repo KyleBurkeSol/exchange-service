@@ -19,13 +19,13 @@ public class ExchangeRateRepositoryTests {
     public void findByFromAndTo_Success(){
 
         ExchangeRate exchangeRate =
-                new ExchangeRate("INR","USD",86.00);
+                new ExchangeRate("INR","USD",1/72.00);
         ExchangeRate rateResponse = exchangeRateRepository.save(exchangeRate);
 
         ExchangeRate exchangeRate1 = exchangeRateRepository
                 .findByFromCurrencyAndToCurrency("INR", "USD");
 
-        Assert.assertEquals(86.00, exchangeRate1.getConversion(), 0);
+        Assert.assertEquals(1/72.00, exchangeRate1.getConversion(), 0);
         Assert.assertEquals("INR", exchangeRate1.getFromCurrency());
         Assert.assertEquals("USD", exchangeRate1.getToCurrency());
     }
