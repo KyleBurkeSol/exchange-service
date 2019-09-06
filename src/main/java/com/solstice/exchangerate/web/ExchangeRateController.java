@@ -1,19 +1,19 @@
-package com.solstice.exchangeservice.web;
+package com.solstice.exchangerate.web;
 
-import com.solstice.exchangeservice.model.ExchangeRate;
-import com.solstice.exchangeservice.model.GenericResponse;
-import com.solstice.exchangeservice.service.ExchangeServiceService;
+import com.solstice.exchangerate.model.ExchangeRate;
+import com.solstice.exchangerate.model.GenericResponse;
+import com.solstice.exchangerate.service.ExchangeRateService;
 import io.swagger.annotations.Api;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @Api(tags = "Exchange Service Controller")
-public class ExchangeServiceController {
+public class ExchangeRateController {
 
-	private final ExchangeServiceService exchangeServiceService;
+	private final ExchangeRateService exchangeServiceService;
 
-	public ExchangeServiceController(ExchangeServiceService exchangeServiceService) {
+	public ExchangeRateController(ExchangeRateService exchangeServiceService) {
 		this.exchangeServiceService = exchangeServiceService;
 	}
 

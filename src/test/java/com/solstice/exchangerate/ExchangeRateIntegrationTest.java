@@ -1,7 +1,7 @@
-package com.solstice.exchangeservice;
+package com.solstice.exchangerate;
 
-import com.solstice.exchangeservice.data.ExchangeServiceRepository;
-import com.solstice.exchangeservice.model.ExchangeRate;
+import com.solstice.exchangerate.data.ExchangeRateRepository;
+import com.solstice.exchangerate.model.ExchangeRate;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -17,12 +17,12 @@ import org.springframework.web.client.RestTemplate;
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT)
 @AutoConfigureMockMvc
-public class ExchangeServiceIntegrationTest {
+public class ExchangeRateIntegrationTest {
 
 	@Autowired
 	RestTemplate restTemplate;
 	@Autowired
-	ExchangeServiceRepository exchangeServiceRepository;
+	ExchangeRateRepository exchangeRateRepository;
 	@Autowired
 	MockMvc mockMvc;
 
@@ -31,7 +31,7 @@ public class ExchangeServiceIntegrationTest {
 		//arrange
 		//act
 
-		exchangeServiceRepository.save(new ExchangeRate("USD",
+		exchangeRateRepository.save(new ExchangeRate("USD",
 				"INR",86.00));
 
 		ResponseEntity<ExchangeRate> exchangeRateResponse = restTemplate

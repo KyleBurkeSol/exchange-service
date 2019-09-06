@@ -1,7 +1,6 @@
-package com.solstice.exchangeservice.exception;
+package com.solstice.exchangerate.exception;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import lombok.Getter;
 

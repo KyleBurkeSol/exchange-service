@@ -1,6 +1,6 @@
-package com.solstice.exchangeservice.data;
+package com.solstice.exchangerate.data;
 
-import com.solstice.exchangeservice.model.ExchangeRate;
+import com.solstice.exchangerate.model.ExchangeRate;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -10,19 +10,19 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 @RunWith(SpringRunner.class)
 @DataJpaTest
-public class ExchangeServiceRepositoryTests {
+public class ExchangeRateRepositoryTests {
 
     @Autowired
-    public ExchangeServiceRepository exchangeServiceRepository;
+    public ExchangeRateRepository exchangeRateRepository;
 
     @Test
     public void findByFromAndTo_Success(){
 
         ExchangeRate exchangeRate =
                 new ExchangeRate("INR","USD",86.00);
-        ExchangeRate rateResponse = exchangeServiceRepository.save(exchangeRate);
+        ExchangeRate rateResponse = exchangeRateRepository.save(exchangeRate);
 
-        ExchangeRate exchangeRate1 = exchangeServiceRepository
+        ExchangeRate exchangeRate1 = exchangeRateRepository
                 .findByFromCurrencyAndToCurrency("INR", "USD");
 
         Assert.assertEquals(86.00, exchangeRate1.getConversion(), 0);

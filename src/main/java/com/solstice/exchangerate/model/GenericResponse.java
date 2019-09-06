@@ -1,4 +1,4 @@
-package com.solstice.exchangeservice.model;
+package com.solstice.exchangerate.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

@@ -1,8 +1,8 @@
-package com.solstice.exchangeservice.service;
+package com.solstice.exchangerate.service;
 
-import com.solstice.exchangeservice.data.ExchangeServiceRepository;
-import com.solstice.exchangeservice.exception.ResourceAlreadyExistsException;
-import com.solstice.exchangeservice.model.ExchangeRate;
+import com.solstice.exchangerate.data.ExchangeRateRepository;
+import com.solstice.exchangerate.exception.ResourceAlreadyExistsException;
+import com.solstice.exchangerate.model.ExchangeRate;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -17,27 +17,27 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.BDDMockito.given;
 
-@WebMvcTest(ExchangeServiceService.class)
+@WebMvcTest(ExchangeRateService.class)
 @RunWith(SpringRunner.class)
-public class ExchangeServiceServiceTests {
+public class ExchangeRateServiceTests {
 
     @Autowired
     MockMvc mockMvc;
 
     @Autowired
-    ExchangeServiceService exchangeServiceService;
+    ExchangeRateService exchangeRateService;
 
     @MockBean
-    ExchangeServiceRepository exchangeServiceRepository;
+    ExchangeRateRepository exchangeRateRepository;
 
     @Test
     public void serviceTest_USDTOINR_Success() {
 
-        given(exchangeServiceRepository.findByFromCurrencyAndToCurrency(Mockito.anyString(), Mockito.anyString()))
+        given(exchangeRateRepository.findByFromCurrencyAndToCurrency(Mockito.anyString(), Mockito.anyString()))
                 .willReturn(new ExchangeRate("USD", "INR", 72.00));
 
         ExchangeRate exchangeRate =
-                exchangeServiceService.getExchangeRate("USD", "INR");
+                exchangeRateService.getExchangeRate("USD", "INR");
 
         Assert.assertEquals(72.00, exchangeRate.getConversion(), 0);
         Assert.assertEquals("USD", exchangeRate.getFromCurrency());
@@ -47,11 +47,11 @@ public class ExchangeServiceServiceTests {
     @Test
     public void serviceTest_INRTOUSD_getExchangeRate_Success() {
 
-        given(exchangeServiceRepository.findByFromCurrencyAndToCurrency(Mockito.anyString(), Mockito.anyString()))
+        given(exchangeRateRepository.findByFromCurrencyAndToCurrency(Mockito.anyString(), Mockito.anyString()))
                 .willReturn(new ExchangeRate( "INR", "USD", 86.00));
 
         ExchangeRate exchangeRate =
-                exchangeServiceService.getExchangeRate("INR", "USD");
+                exchangeRateService.getExchangeRate("INR", "USD");
 
         Assert.assertEquals(86.00, exchangeRate.getConversion(), 0);
         Assert.assertEquals("INR", exchangeRate.getFromCurrency());
@@ -63,11 +63,11 @@ public class ExchangeServiceServiceTests {
 
         ExchangeRate r = new ExchangeRate("USD", "INR", 86.00);
 
-        given(exchangeServiceRepository.findByFromCurrencyAndToCurrency(anyString(), anyString()))
+        given(exchangeRateRepository.findByFromCurrencyAndToCurrency(anyString(), anyString()))
                 .willReturn(null);
-        given(exchangeServiceRepository.save(any())).willReturn(null);
+        given(exchangeRateRepository.save(any())).willReturn(null);
 
-        exchangeServiceService.addExchangeRate(r);
+        exchangeRateService.addExchangeRate(r);
     }
 
     @Test(expected = ResourceAlreadyExistsException.class)
@@ -75,9 +75,9 @@ public class ExchangeServiceServiceTests {
 
         ExchangeRate r = new ExchangeRate("USD", "INR", 86.00);
 
-        given(exchangeServiceRepository.findByFromCurrencyAndToCurrency(anyString(), anyString()))
+        given(exchangeRateRepository.findByFromCurrencyAndToCurrency(anyString(), anyString()))
                 .willReturn(r);
 
-        exchangeServiceService.addExchangeRate(r);
+        exchangeRateService.addExchangeRate(r);
     }
 }

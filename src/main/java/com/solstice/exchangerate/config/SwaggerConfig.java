@@ -1,4 +1,4 @@
-package com.solstice.exchangeservice.config;
+package com.solstice.exchangerate.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -16,7 +16,7 @@ public class SwaggerConfig {
     public Docket api() {
         return new Docket(DocumentationType.SWAGGER_2)
                 .select()
-                .apis(RequestHandlerSelectors.basePackage("com.solstice.exchangeservice.web"))
+                .apis(RequestHandlerSelectors.basePackage("com.solstice.exchangerate.web"))
                 .paths(PathSelectors.any())
                 .build()
                 .tags(new Tag("Exchange Service Controller", "This is used for getting and posting Exchange Rates"));

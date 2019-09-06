@@ -1,6 +1,6 @@
-package com.solstice.exchangeservice.exception;
+package com.solstice.exchangerate.exception;
 
-import com.solstice.exchangeservice.model.GenericResponse;
+import com.solstice.exchangerate.model.GenericResponse;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
