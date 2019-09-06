@@ -53,14 +53,14 @@ public class ExchangeRateControllerTest {
 
 		//arrange
 		given(exchangeRateService.getExchangeRate(anyString(), anyString()))
-				.willReturn(new ExchangeRate("INR", "USD", 72.0));
+				.willReturn(new ExchangeRate("INR", "USD", 1/72.00));
 
 		//act
 		mockMvc.perform(MockMvcRequestBuilders.get("/exchange-rate?from=INR&to=USD"))
 				.andExpect(status().isOk())
 				.andExpect(jsonPath("fromCurrency").value("INR"))
 				.andExpect(jsonPath("toCurrency").value("USD"))
-				.andExpect(jsonPath("conversion").value(72.0));
+				.andExpect(jsonPath("conversion").value(1/72.00));
 		//assert
 	}
 
@@ -93,7 +93,7 @@ public class ExchangeRateControllerTest {
 	public void addCurrency() throws Exception {
 		willDoNothing().given(exchangeRateService).addExchangeRate(any());
 
-		String jsonBody = new ObjectMapper().writeValueAsString(new ExchangeRate("USD", "INR", 77.0));
+		String jsonBody = new ObjectMapper().writeValueAsString(new ExchangeRate("USD", "INR", 72.0));
 
 		mockMvc.perform(MockMvcRequestBuilders.post("/exchange-rate")
 				.content(jsonBody).contentType(MediaType.APPLICATION_JSON))
@@ -106,7 +106,7 @@ public class ExchangeRateControllerTest {
 
 		willThrow(HttpMessageNotReadableException.class).given(exchangeRateService).addExchangeRate(any());
 
-		String jsonBody = new ObjectMapper().writeValueAsString(new ExchangeRate("USD", "INR", 77.0));
+		String jsonBody = new ObjectMapper().writeValueAsString(new ExchangeRate("USD", "INR", 72.0));
 
 		mockMvc.perform(MockMvcRequestBuilders.post("/exchange-rate")
 				.content(jsonBody).contentType(MediaType.APPLICATION_JSON))

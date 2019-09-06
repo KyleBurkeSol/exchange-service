@@ -32,7 +32,7 @@ public class ExchangeRateIntegrationTest {
 		//act
 
 		exchangeRateRepository.save(new ExchangeRate("USD",
-				"INR",86.00));
+				"INR",72.00));
 
 		ResponseEntity<ExchangeRate> exchangeRateResponse = restTemplate
 				.getForEntity("http://localhost:8080/exchange-rate?from=USD&to=INR", ExchangeRate.class);
@@ -41,7 +41,7 @@ public class ExchangeRateIntegrationTest {
 		Assert.assertEquals(HttpStatus.OK, exchangeRateResponse.getStatusCode());
 		Assert.assertEquals("USD", exchangeRateResponse.getBody().getFromCurrency());
 		Assert.assertEquals("INR", exchangeRateResponse.getBody().getToCurrency());
-		Assert.assertEquals(86.00, exchangeRateResponse.getBody().getConversion(), 0);
+		Assert.assertEquals(72.00, exchangeRateResponse.getBody().getConversion(), 0);
 	}
 
 	@Test

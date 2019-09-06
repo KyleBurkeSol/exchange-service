@@ -48,12 +48,12 @@ public class ExchangeRateServiceTests {
     public void serviceTest_INRTOUSD_getExchangeRate_Success() {
 
         given(exchangeRateRepository.findByFromCurrencyAndToCurrency(Mockito.anyString(), Mockito.anyString()))
-                .willReturn(new ExchangeRate( "INR", "USD", 86.00));
+                .willReturn(new ExchangeRate( "INR", "USD", 1/72.00));
 
         ExchangeRate exchangeRate =
                 exchangeRateService.getExchangeRate("INR", "USD");
 
-        Assert.assertEquals(86.00, exchangeRate.getConversion(), 0);
+        Assert.assertEquals(1/72.00, exchangeRate.getConversion(), 0);
         Assert.assertEquals("INR", exchangeRate.getFromCurrency());
         Assert.assertEquals("USD", exchangeRate.getToCurrency());
     }
@@ -61,7 +61,7 @@ public class ExchangeRateServiceTests {
     @Test
     public void serviceTest_addExchangeRate_add(){
 
-        ExchangeRate r = new ExchangeRate("USD", "INR", 86.00);
+        ExchangeRate r = new ExchangeRate("USD", "INR", 72.00);
 
         given(exchangeRateRepository.findByFromCurrencyAndToCurrency(anyString(), anyString()))
                 .willReturn(null);
@@ -73,7 +73,7 @@ public class ExchangeRateServiceTests {
     @Test(expected = ResourceAlreadyExistsException.class)
     public void serviceTest_addExchangeRate_Failure(){
 
-        ExchangeRate r = new ExchangeRate("USD", "INR", 86.00);
+        ExchangeRate r = new ExchangeRate("USD", "INR", 72.00);
 
         given(exchangeRateRepository.findByFromCurrencyAndToCurrency(anyString(), anyString()))
                 .willReturn(r);
